@@ -79,7 +79,6 @@
 - 关于`kvm_set_cr0`的上游函数
 
   - `kvm_set_cr0`的butterfly图如下
-
 ![image-20230110152530220](https://user-images.githubusercontent.com/79641956/211510162-19e3d489-0930-4438-a196-6cc2d7b42a7c.png)
 
   - `kvm_lmsw`函数，调用关系上看是给vmx下使用的；`handle_set_cr0`函数也是vmx下用的
