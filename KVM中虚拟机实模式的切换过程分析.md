@@ -64,7 +64,6 @@
 - 关于`svm_set_cr0`的上游函数
 
   - 软件识别的`svm_set_cr0`的butterfly图长这样
-
 ![image-20230110150020431](https://user-images.githubusercontent.com/79641956/211510141-bf4cc486-44a4-4bed-b720-5d50a41bf3f1.png)
 
 
