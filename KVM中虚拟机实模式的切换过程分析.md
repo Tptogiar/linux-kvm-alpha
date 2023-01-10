@@ -101,3 +101,15 @@
 
 # 关于cr_interception流程和cr_trap流程的区别
 
+这里想不明白，`cr_interception`和`cr_trap`最终都会调用到`svm_set_cr0`，但是`cr_trap`的逻辑很简单，而`cr_interception`的过程比较复杂，后面还调用了emulate.c下的一些模拟函数
+
+想不太明白的是：`cr_trap`为什么可以这么简单？以及和`cr_interception`的那边的流程的区别和联系是什么？
+
+
+
+
+
+
+
+# 总览
+![image](https://user-images.githubusercontent.com/79641956/211513724-7cc6036b-faff-4b6c-b8f0-4301a47cc569.png)
