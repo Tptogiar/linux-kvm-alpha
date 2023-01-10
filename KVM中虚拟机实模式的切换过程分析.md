@@ -61,9 +61,9 @@
 
 # 目的二. kvm_set_cr0，svm_set_cr0他们各自上游函数是怎么样的，有哪些是跟模式切换强相关的
 
-- 关于`svm_set_cr0`
+- 关于`svm_set_cr0`的上游函数
 
-  - 软件识别的`svm_set_cr0`的butterfly长这样
+  - 软件识别的`svm_set_cr0`的butterfly图长这样
 
 ![image-20230110150020431](https://user-images.githubusercontent.com/79641956/211510141-bf4cc486-44a4-4bed-b720-5d50a41bf3f1.png)
 
@@ -77,9 +77,9 @@
     - `__set_sregs_common`函数，在向KVM API发起设置寄存器请求后，位于`virt/kvm/kvm_main.c`下的`kvm_vcpu_ioctl`函数的子流程会调用到这个函数，进而可能设置到相关的寄存器
     - `kvm_vcpu_reset`函数，reset vcpu的时候设置到比较多寄存器，cr0只是其中一个
 
-- 关于`kvm_set_cr0`
+- 关于`kvm_set_cr0`的上游函数
 
-  - `kvm_set_cr0`的butterfly如下
+  - `kvm_set_cr0`的butterfly图如下
 
 ![image-20230110152530220](https://user-images.githubusercontent.com/79641956/211510162-19e3d489-0930-4438-a196-6cc2d7b42a7c.png)
 
