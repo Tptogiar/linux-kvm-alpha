@@ -168,6 +168,41 @@
   当guest要修改页面内容的时候，在拷贝页面成为两个，分别给两个guest使用
 
   
+  
+  ## qemu向KVM注册内存的大概过程
+
+- qemu主要是通过KVM API与KVM交互的，交互的方式向设备文件/dev/kvm发起相应的ioctl
+
+  内存注册接口对应`KVM_SET_USER_MEMORY_REGION`命令，并传入`kvm_userspace_memory_region`结构体
+
+  ```
+  struct kvm_userspace_memory_region {
+         __u32 slot;
+         __u32 flags;
+         __u64 guest_phys_addr;
+         __u64 memory_size; /* bytes */
+         __u64 userspace_addr; /* start of the userspace allocated memory */
+  };
+  ```
+
+- 虚拟机启动时，qemu会在其虚拟空间内申请一段连续的内存空间，并根据启动参数虚拟出一些内存条slot信息，并向KVM进行注册
+
+- KVM用kvm_memory_slot 结构体来记录某个guest注册过的内存条，其中可以根据base_gfn(guest的GPN)，npages(页数)，userspace_addr(在qemu中的HVA)字段可以在知道某个具体的GPN情况下，找到对应的slot，进而找到对应的HVA，在根据host的页表找到对应的HPA
+
+  ```
+  struct kvm_memory_slot {
+         gfn_t base_gfn;
+         unsigned long npages;
+         unsigned long *dirty_bitmap;
+         struct kvm_arch_memory_slot arch;
+         unsigned long userspace_addr;
+         u32 flags;
+         short id;
+         u16 as_id;
+  };
+  ```
+
+  
 
 
 
