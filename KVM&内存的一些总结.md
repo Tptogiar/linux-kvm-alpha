@@ -93,7 +93,7 @@
 - **保护模式下的大概寻址过程：**
 
   - 同实模式一样，刚开始影子页表是空的，当guest发送GVA到MMU之后，会触发缺页异常，陷入VMM
-  - VMM找到guest的cr3，拿到guest的gpt，遍历guest的页表
+  - VMM找到guest的cr3(在寄存器上拿)，拿到guest的gpt，遍历guest的页表
   - 如果此时guest内GVA到GPA的映射还没有建立，或是该entry是只读的，VMM会件缺页异常注入给guest，让guest自己处理，guest收到这样的异常后，会给GVA分配对应的GPA，并尝试修改页表，这个操作会被VMM拦截，以便于VMM更新对应的影子页表
   - 如果此时guest内GVA到GPA的映射已经建立，则VMM会读取对应的GPA，在找到对应的slot，进而找到HVA，并分配对应的HPA，更新影子页表
   - 下次guest请求相同的GVA时，由于影子页表中已经存在对应的映射，所以guest就可以顺利得到对应的HPA
