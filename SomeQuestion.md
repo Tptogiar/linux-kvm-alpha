@@ -23,7 +23,7 @@ min = PIN_BASED_EXT_INTR_MASK | PIN_BASED_NMI_EXITING;
 
 2.
 
-posted-interrupt机制中的Posted-interrupt notification vector是一个16位的字段，只用了低8位来存储一个vector，也就是说一次只能存放一个vector，只能表示一个vector。
+posted-interrupt机制中的Posted-interrupt notification vector是一个16位的字段，只用了低8位来存储一个vector(25.6.8 Controls for APIC Virtualization )，也就是说一次只能存放一个vector，只能表示一个vector。
 
 而发生中断之后只有vector和这个Posted-interrupt notification vector对应上才不会导致exit，可以直接传给gues。
 
